@@ -1,15 +1,14 @@
 import React, { useCallback } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Button from '../common/Button';
-import Particles from 'react-tsparticles'; // Import Particles
-import { loadSlim } from 'tsparticles-slim'; // or 'tsparticles' for full bundle
+import Particles from 'react-tsparticles';
+import { loadSlim } from 'tsparticles-slim';
 
 const Hero = () => {
   const { scrollYProgress } = useScroll();
 
-  // Scroll animations for main text content
   const contentOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5], [1, 1, 0.7]);
-  const contentY = useTransform(scrollYProgress, [0, 0.5], ['0%', '-30%']); // Less aggressive movement
+  const contentY = useTransform(scrollYProgress, [0, 0.5], ['0%', '-30%']);
 
   const headlineVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -18,7 +17,7 @@ const Hero = () => {
       y: 0,
       transition: {
         staggerChildren: 0.08,
-        delayChildren: 1.0, // Start text animation after background particles load
+        delayChildren: 1.0,
       },
     },
   };
@@ -58,9 +57,8 @@ const Hero = () => {
     { text: 'Earnings.', color: 'text-brand-accent' }
   ];
 
-  // Particles config
   const particlesInit = useCallback(async engine => {
-    await loadSlim(engine); // 'loadFull' for more options, 'loadSlim' for smaller bundle
+    await loadSlim(engine);
   }, []);
 
   const particlesLoaded = useCallback(async container => {
@@ -69,15 +67,14 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center text-center overflow-hidden bg-brand-dark">
-      {/* Particles Background */}
       <Particles
         id="tsparticles"
         init={particlesInit}
         loaded={particlesLoaded}
-        className="absolute inset-0 z-0" // Ensure particles are behind content
+        className="absolute inset-0 z-0"
         options={{
           background: {
-            color: { value: "#1E1E2D" }, // Use brand-dark for background
+            color: { value: "#1E1E2D" },
           },
           fpsLimit: 120,
           interactivity: {
@@ -104,7 +101,7 @@ const Hero = () => {
           },
           particles: {
             color: {
-              value: ["#E65C92", "#D0487E", "#F8F8F8", "#9B59B6"], // Pink, darker pink, white, purple accents
+              value: ["#E65C92", "#D0487E", "#F8F8F8", "#9B59B6"],
             },
             links: {
               color: "#E65C92",
@@ -147,7 +144,6 @@ const Hero = () => {
         }}
       />
 
-      {/* Main Hero Content */}
       <motion.div
         className="relative z-10 p-6 max-w-4xl mx-auto"
         style={{ opacity: contentOpacity, y: contentY }}
@@ -199,7 +195,6 @@ const Hero = () => {
           </Button>
         </motion.div>
       </motion.div>
-      {/* Scroll down indicator */}
       <motion.div
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10"
         initial={{ opacity: 0 }}
