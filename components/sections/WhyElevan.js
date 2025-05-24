@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaDollarSign, FaChartLine, FaHeadphones } from 'react-icons/fa'; // Example icons
-import FeatureCard from '../common/FeatureCard'; // Import the new FeatureCard
+import { FaDollarSign, FaChartLine, FaHeadphones } from 'react-icons/fa';
+import FeatureCard from '../common/FeatureCard';
 
 const WhyElevan = () => {
   const features = [
@@ -40,8 +40,7 @@ const WhyElevan = () => {
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.7, delay: 0.2 }}
       >
-        {/* THIS IS THE LINE THAT NEEDS THE CHANGE */}
-        We&apos;re more than just an agency; we&apos;re your dedicated partners in success. Discover the Elevan difference.
+        We&#39;re more than just an agency; we&#39;re your dedicated partners in success. Discover the Elevan difference.
       </motion.p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
