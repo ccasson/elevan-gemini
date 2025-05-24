@@ -12,12 +12,11 @@ const Logo = ({ className = "text-brand-accent h-8 md:h-10" }) => (
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
       >
         <svg
-          className={`${className} filter`} // Add filter class
+          className={`${className} filter`}
           viewBox="0 0 200 50"
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
         >
-          {/* SVG Filters for glowing and slight blurring effect */}
           <defs>
             <filter id="neon-glow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
@@ -28,7 +27,6 @@ const Logo = ({ className = "text-brand-accent h-8 md:h-10" }) => (
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            {/* Inner "3D" shadow effect */}
             <filter id="inner-shadow" x="-50%" y="-50%" width="200%" height="200%">
               <feOffset dx="1" dy="1" />
               <feGaussianBlur stdDeviation="0.5" result="offset-blur" />
@@ -45,15 +43,15 @@ const Logo = ({ className = "text-brand-accent h-8 md:h-10" }) => (
           <motion.text
             x="5"
             y="38"
-            fontFamily="Orbitron, sans-serif" // Use the new headings font
+            fontFamily="Orbitron, sans-serif" // Using Orbitron for the logo text
             fontSize="38"
             fontWeight="900"
             className="fill-current text-brand-accent animate-shimmer" // Apply shimmer animation
             style={{
-              stroke: '#ffffff', // White stroke
-              strokeWidth: '1.5px', // Slightly thicker stroke
+              stroke: '#ffffff',
+              strokeWidth: '1.5px',
               strokeLinejoin: 'round',
-              filter: 'url(#neon-glow) url(#inner-shadow)', // Apply both filters
+              filter: 'url(#neon-glow) url(#inner-shadow)',
             }}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
