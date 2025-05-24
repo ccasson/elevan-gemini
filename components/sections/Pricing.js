@@ -81,46 +81,64 @@ const Pricing = () => {
       </motion.p>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
-        {tiers.map((tier, index) => (
-          <motion.div
-            key={tier.id}
-            // MODIFIED LINE BELOW: Consolidated className to avoid parsing issues
-            className={`bg-brand-dark-secondary rounded-lg p-8 flex flex-col items-center justify-between text-center transition-all duration-300 ${tier.highlight ? 'border-4 border-brand-accent shadow-2xl scale-105' : 'border-2 border-brand-accent-hover shadow-lg'} text-gray-200 h-full`}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-          >
-            <div className="flex flex-col items-center mb-6">
-              <div className="text-brand-accent text-6xl mb-4">
-                {tier.icon}
+        {tiers.map((tier, index) => {
+          // MODIFIED: Construct className string outside JSX
+          const cardClasses = `
+            bg-brand-dark-secondary 
+            rounded-lg 
+            p-8 
+            flex 
+            flex-col 
+            items-center 
+            justify-between 
+            text-center 
+            transition-all 
+            duration-300 
+            ${tier.highlight ? 'border-4 border-brand-accent shadow-2xl scale-105' : 'border-2 border-brand-accent-hover shadow-lg'} 
+            text-gray-200 
+            h-full
+          `.replace(/\s+/g, ' ').trim(); // Clean up extra spaces
+
+          return (
+            <motion.div
+              key={tier.id}
+              className={cardClasses} // Pass the constructed string
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              <div className="flex flex-col items-center mb-6">
+                <div className="text-brand-accent text-6xl mb-4">
+                  {tier.icon}
+                </div>
+                <h3 className="text-3xl font-extrabold font-headings text-white mb-2">
+                  {tier.name}
+                </h3>
+                <p className="text-gray-400 mb-4">{tier.description}</p>
+                <p className="text-5xl font-extrabold text-brand-accent">
+                  {tier.fee}
+                </p>
+                <p className="text-gray-400 mb-6">{tier.feeFrom}</p>
               </div>
-              <h3 className="text-3xl font-extrabold font-headings text-white mb-2">
-                {tier.name}
-              </h3>
-              <p className="text-gray-400 mb-4">{tier.description}</p>
-              <p className="text-5xl font-extrabold text-brand-accent">
-                {tier.fee}
-              </p>
-              <p className="text-gray-400 mb-6">{tier.feeFrom}</p>
-            </div>
 
-            <ul className="text-left w-full mb-8 space-y-2">
-              {tier.features.map((feature, idx) => (
-                <li key={idx} className="flex items-center text-gray-200">
-                  <svg className="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
-                  </svg>
-                  {feature}
-                </li>
-              ))}
-            </ul>
+              <ul className="text-left w-full mb-8 space-y-2">
+                {tier.features.map((feature, idx) => (
+                  <li key={idx} className="flex items-center text-gray-200">
+                    <svg className="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
 
-            <Button href={tier.buttonLink} variant={tier.highlight ? 'primary' : 'secondary'} size="lg'>
-              {tier.buttonText}
-            </Button>
-          </motion.div>
-        ))}
+              <Button href={tier.buttonLink} variant={tier.highlight ? 'primary' : 'secondary'} size="lg">
+                {tier.buttonText}
+              </Button>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );
