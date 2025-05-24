@@ -18,6 +18,7 @@ const WhyElevan = () => {
     {
       icon: <FaHeadphones />,
       title: 'Dedicated Account Management',
+      description: 'Receive personalized support from a dedicated account manager focused on your success and available to guide you every step.',
     },
   ];
 
@@ -39,6 +40,7 @@ const WhyElevan = () => {
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.7, delay: 0.2 }}
       >
+        {/* THIS IS THE LINE THAT NEEDS THE CHANGE */}
         We&apos;re more than just an agency; we&apos;re your dedicated partners in success. Discover the Elevan difference.
       </motion.p>
 
