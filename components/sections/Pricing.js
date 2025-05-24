@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaRocket, FaStar, FaChartLine } from 'react-icons/fa'; // Icons
-import Button from '../common/Button'; // Assuming you have a Button component
+import { FaRocket, FaStar, FaChartLine } from 'react-icons/fa';
+import Button from '../common/Button';
 
 const Pricing = () => {
   const tiers = [
@@ -11,7 +11,7 @@ const Pricing = () => {
       icon: <FaStar />,
       description: 'For aspiring creators taking their first step into professional management.',
       fee: '35%', // Updated percentage
-      feeFrom: 'of tips & messages', // Changed "from" to "of" for clarity
+      feeFrom: 'of tips & messages',
       features: [
         'Full Account Management',
         'Basic Content Strategy',
@@ -19,7 +19,7 @@ const Pricing = () => {
         'Weekly Performance Reports',
       ],
       buttonText: 'Apply for Starter',
-      buttonLink: 'https://manageher.typeform.com/to/eN4XvN0V', // Update with actual link if different
+      buttonLink: 'https://manageher.typeform.com/to/eN4XvN0V',
     },
     {
       id: 'growth',
@@ -36,8 +36,8 @@ const Pricing = () => {
         'Promotion Assistance',
       ],
       buttonText: 'Apply for Growth',
-      buttonLink: 'https://manageher.typeform.com/to/eN4XvN0V', // Update with actual link if different
-      highlight: true, // This tier is highlighted
+      buttonLink: 'https://manageher.typeform.com/to/eN4XvN0V',
+      highlight: true,
     },
     {
       id: 'elite',
@@ -55,7 +55,7 @@ const Pricing = () => {
         'Personal Brand Development',
       ],
       buttonText: 'Apply for Elite',
-      buttonLink: 'https://manageher.typeform.com/to/eN4XvN0V', // Update with actual link if different
+      buttonLink: 'https://manageher.typeform.com/to/eN4XvN0V',
     },
   ];
 
