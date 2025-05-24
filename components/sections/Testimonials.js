@@ -1,28 +1,33 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { motion } from 'framer-motion';
-import Card from '../common/Card';
+import Card from '../common/Card'; // Ensure this Card component is updated
 import Image from 'next/image';
 import { LuQuote } from 'react-icons/lu';
+
+// Don't forget to include slick-carousel and slick-theme CSS in your _app.js or global.css
+// e.g., in _app.js:
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
 const testimonialsData = [
   {
     quote: "Partnering with Elevan was the best decision for my OnlyFans career. My earnings tripled in just three months, and I finally have time to focus on creating amazing content!",
     name: 'Jessica M.',
     handle: '@JessDreamsOF',
-    avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1', // Photo by Andrea Piacquadio on Pexels
+    avatar: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1',
   },
   {
     quote: "The team at Elevan is incredibly professional and supportive. They handle everything seamlessly, from chatting to promotion. I feel so much less stressed and more successful.",
     name: 'Chloe B.',
     handle: '@SweetChloeB',
-    avatar: 'https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1', // Photo by Christina Morillo on Pexels
+    avatar: 'https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1',
   },
   {
     quote: "I was hesitant about agencies, but Elevan proved me wrong. They're transparent, results-driven, and genuinely care about their creators. My growth has been explosive!",
     name: 'Sophia R.',
     handle: '@SophiaRoseVIP',
-    avatar: 'https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1', // Photo by Nappy on Pexels
+    avatar: 'https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1',
   },
 ];
 
@@ -35,7 +40,7 @@ const Testimonials = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 7000,
-    arrows: false, // Set to true if you want default arrows, or customize them
+    arrows: false,
     pauseOnHover: true,
   };
 
@@ -65,13 +70,13 @@ const Testimonials = () => {
           <Slider {...settings}>
             {testimonialsData.map((testimonial, index) => (
               <div key={index} className="px-2 md:px-4">
-                <Card className="bg-brand-dark text-center" hoverEffect={false}>
+                <Card className="bg-brand-dark text-center" hoverEffect={false}> {/* bg-brand-dark set here directly */}
                   <LuQuote className="text-brand-accent text-5xl mx-auto mb-6 opacity-50" />
                   <p className="text-lg md:text-xl italic text-gray-200 mb-8 leading-relaxed">
                     &ldquo;{testimonial.quote}&rdquo;
                   </p>
                   <div className="flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full overflow-hidden mr-4 border-2 border-brand-accent">
+                    <div className="w-16 h-16 rounded-full overflow-hidden mr-4 border-2 border-brand-accent"> {/* Direct border for image */}
                       <Image
                         src={testimonial.avatar}
                         alt={testimonial.name}
