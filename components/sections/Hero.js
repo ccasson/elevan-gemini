@@ -1,67 +1,24 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Button from '../common/Button';
-
-// A separate component for the large, animated hero logo
-const HeroIntroLogo = () => {
-  const { scrollYProgress } = useScroll();
-
-  // Animate from center to top-left (navbar position)
-  const x = useTransform(scrollYProgress, [0, 0.3], ['-50%', '-250%']); // Adjust these values for final positioning
-  const y = useTransform(scrollYProgress, [0, 0.3], ['-50%', '-200%']); // Adjust these values for final positioning
-  const scale = useTransform(scrollYProgress, [0, 0.3], [1, 0.2]); // Shrink to navbar size
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]); // Fade out slightly before full transition
-
-  return (
-    <motion.div
-      className="absolute top-1/2 left-1/2 z-20 flex items-center justify-center pointer-events-none" // Use pointer-events-none so it doesn't block clicks
-      style={{ x, y, scale, opacity }}
-    >
-      <motion.svg
-        className="h-32 md:h-48 lg:h-64" // Large initial size for dramatic effect
-        viewBox="0 0 200 50"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        initial={{ opacity: 0, scale: 0.5, rotateY: 90 }} // Start invisible, small, rotated
-        animate={{ opacity: 1, scale: 1, rotateY: 0 }} // Animate to full size, no rotation
-        transition={{ duration: 1.5, ease: "easeOut" }} // Slower, impactful entrance
-      >
-        <motion.text
-          x="5"
-          y="38"
-          fontFamily="Montserrat, sans-serif"
-          fontSize="38" // Use the bolder font size here too
-          fontWeight="900"
-          className="fill-current text-brand-accent"
-          style={{
-            textShadow: '0 0 15px rgba(230, 92, 146, 0.8), 0 0 30px rgba(230, 92, 146, 0.5)', // Even stronger glow
-            stroke: '#ffffff',
-            strokeWidth: '1.2px', // Slightly thicker stroke for bold look
-            strokeLinejoin: 'round',
-          }}
-        >
-          Elevan
-        </motion.text>
-      </motion.svg>
-    </motion.div>
-  );
-};
-
+import Particles from 'react-tsparticles'; // Import Particles
+import { loadSlim } from 'tsparticles-slim'; // or 'tsparticles' for full bundle
 
 const Hero = () => {
   const { scrollYProgress } = useScroll();
 
-  // Headline & Tagline animations for the hero text
-  const headlineOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5], [0, 1, 0.7]); // Fade in, then fade slightly out on scroll
-  const headlineY = useTransform(scrollYProgress, [0, 0.5], ['0%', '-50%']); // Move up on scroll
+  // Scroll animations for main text content
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5], [1, 1, 0.7]);
+  const contentY = useTransform(scrollYProgress, [0, 0.5], ['0%', '-30%']); // Less aggressive movement
 
   const headlineVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
+      y: 0,
       transition: {
         staggerChildren: 0.08,
-        delayChildren: 2.0, // Delay text animation to let HeroIntroLogo play first
+        delayChildren: 1.0, // Start text animation after background particles load
       },
     },
   };
@@ -81,12 +38,12 @@ const Hero = () => {
 
   const taglineVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, delay: 2.8, ease: "easeOut" } }, // Delayed
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, delay: 1.8, ease: "easeOut" } },
   };
 
   const buttonVariants = {
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, delay: 3.2, ease: "easeOut" } }, // Delayed
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, delay: 2.2, ease: "easeOut" } },
   };
 
   const line1 = [
@@ -101,19 +58,99 @@ const Hero = () => {
     { text: 'Earnings.', color: 'text-brand-accent' }
   ];
 
-  return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center text-center overflow-hidden
-                                  bg-gradient-hero bg-[length:400%_400%] animate-gradient-shift">
-      {/* Darker Overlay for better text contrast */}
-      <div className="absolute inset-0 bg-black opacity-50"></div>
+  // Particles config
+  const particlesInit = useCallback(async engine => {
+    await loadSlim(engine); // 'loadFull' for more options, 'loadSlim' for smaller bundle
+  }, []);
 
-      {/* Hero Intro Logo - will animate and shrink into Navbar Logo position */}
-      <HeroIntroLogo />
+  const particlesLoaded = useCallback(async container => {
+    // console.log("Particles container loaded", container);
+  }, []);
+
+  return (
+    <section id="home" className="relative min-h-screen flex items-center justify-center text-center overflow-hidden bg-brand-dark">
+      {/* Particles Background */}
+      <Particles
+        id="tsparticles"
+        init={particlesInit}
+        loaded={particlesLoaded}
+        className="absolute inset-0 z-0" // Ensure particles are behind content
+        options={{
+          background: {
+            color: { value: "#1E1E2D" }, // Use brand-dark for background
+          },
+          fpsLimit: 120,
+          interactivity: {
+            events: {
+              onClick: {
+                enable: true,
+                mode: "push",
+              },
+              onHover: {
+                enable: true,
+                mode: "repulse",
+              },
+              resize: true,
+            },
+            modes: {
+              push: {
+                quantity: 4,
+              },
+              repulse: {
+                distance: 100,
+                duration: 0.4,
+              },
+            },
+          },
+          particles: {
+            color: {
+              value: ["#E65C92", "#D0487E", "#F8F8F8", "#9B59B6"], // Pink, darker pink, white, purple accents
+            },
+            links: {
+              color: "#E65C92",
+              distance: 150,
+              enable: true,
+              opacity: 0.5,
+              width: 1,
+            },
+            collisions: {
+              enable: true,
+            },
+            move: {
+              direction: "none",
+              enable: true,
+              outModes: {
+                default: "bounce",
+              },
+              random: false,
+              speed: 2,
+              straight: false,
+            },
+            number: {
+              density: {
+                enable: true,
+                area: 800,
+              },
+              value: 80,
+            },
+            opacity: {
+              value: 0.5,
+            },
+            shape: {
+              type: "circle",
+            },
+            size: {
+              value: { min: 1, max: 5 },
+            },
+          },
+          detectRetina: true,
+        }}
+      />
 
       {/* Main Hero Content */}
       <motion.div
         className="relative z-10 p-6 max-w-4xl mx-auto"
-        style={{ opacity: headlineOpacity, y: headlineY }} // Apply scroll-triggered animations
+        style={{ opacity: contentOpacity, y: contentY }}
       >
         <motion.h1
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold font-headings text-white mb-6 leading-tight"
@@ -167,7 +204,7 @@ const Hero = () => {
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3.5, duration: 1, repeat: Infinity, repeatType: "reverse" }} // Delayed
+        transition={{ delay: 2.8, duration: 1, repeat: Infinity, repeatType: "reverse" }}
       >
         <svg className="w-8 h-8 text-gray-400 animate-bounce" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
           <path d="M19 9l-7 7-7-7"></path>
