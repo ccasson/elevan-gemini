@@ -3,40 +3,36 @@ module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        'brand-dark': '#10101A', // Very dark blue/almost black
-        'brand-dark-secondary': '#1E1E2D', // Darker blue-gray
-        'brand-accent': '#E65C92', // Elegant Pink/Magenta
-        'brand-accent-hover': '#D0487E', // Darker pink for hover
-        'brand-gold': '#D4AF37', // Gold accent (optional)
+        brand: {
+          dark: '#1E1E2D', // Primary dark background
+          'dark-secondary': '#2A2A3E', // Slightly lighter dark for cards/sections
+          accent: '#E65C92', // Pink accent color
+          'accent-hover': '#D0487E', // Slightly darker pink for hover states
+          light: '#F8F8F8', // Light text/element color
+        },
       },
       fontFamily: {
-        sans: ['Lato', 'sans-serif'],
-        headings: ['Montserrat', 'sans-serif'],
+        sans: ['Lato', 'sans-serif'], // Primary body font
+        headings: ['Montserrat', 'sans-serif'], // Headings font
       },
       backgroundImage: {
-        'hero-pattern': "url('https://images.pexels.com/photos/7129713/pexels-photo-7129713.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&dpr=1')",
-        // NEW: Animated gradient background for hero
-        'gradient-hero': 'linear-gradient(270deg, #10101A, #1E1E2D, #2B2B3A, #1E1E2D, #10101A)',
-      },
-      animation: {
-        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-        'gradient-shift': 'gradientShift 15s ease infinite alternate', // NEW
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       keyframes: {
-        fadeInUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        'gradient-shift': {
+          '0%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+          '100%': { 'background-position': '0% 50%' },
         },
-        // NEW: Keyframes for gradient animation
-        gradientShift: {
-          '0%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-          '100%': { backgroundPosition: '0% 50%' },
-        },
+      },
+      animation: {
+        'gradient-shift': 'gradient-shift 15s ease infinite',
       },
     },
   },
