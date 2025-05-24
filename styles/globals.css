@@ -5,8 +5,9 @@
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;500;600;700;800&display=swap');
 
-body {
+html, body { /* Added html selector here */
   @apply bg-brand-dark text-gray-200 font-sans antialiased;
+  overflow-x-hidden; /* Add this line */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -38,7 +39,6 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
   color: #E65C92; /* brand-accent */
 }
-
 .slick-prev:before,
 .slick-next:before {
   font-size: 24px; /* Adjust size as needed */
@@ -60,7 +60,6 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(20px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-
 .animate-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0);
