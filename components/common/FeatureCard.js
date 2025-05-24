@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const FeatureCard = ({ icon, title, description }) => {
   return (
     <motion.div
-      className="bg-brand-dark-secondary rounded-lg p-6 text-center border-2 border-brand-accent-hover shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-brand-accent" // More visible border
+      className="bg-brand-dark-secondary rounded-lg p-6 text-center border-2 border-brand-accent-hover shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-brand-accent"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
