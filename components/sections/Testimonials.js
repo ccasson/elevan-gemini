@@ -68,7 +68,7 @@ const Testimonials = () => {
                 <Card className="bg-brand-dark text-center" hoverEffect={false}>
                   <LuQuote className="text-brand-accent text-5xl mx-auto mb-6 opacity-50" />
                   <p className="text-lg md:text-xl italic text-gray-200 mb-8 leading-relaxed">
-                    "{testimonial.quote}"
+                    &ldquo;{testimonial.quote}&rdquo;
                   </p>
                   <div className="flex items-center justify-center">
                     <div className="w-16 h-16 rounded-full overflow-hidden mr-4 border-2 border-brand-accent">
