@@ -1,7 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { motion } from 'framer-motion';
-import Card from '../common/Card'; // Ensure this Card component is updated
+import Card from '../common/Card'; // This Card component will now have the border fix
 import Image from 'next/image';
 import { LuQuote } from 'react-icons/lu';
 
@@ -70,13 +70,13 @@ const Testimonials = () => {
           <Slider {...settings}>
             {testimonialsData.map((testimonial, index) => (
               <div key={index} className="px-2 md:px-4">
-                <Card className="bg-brand-dark text-center" hoverEffect={false}> {/* bg-brand-dark set here directly */}
+                <Card className="bg-brand-dark text-center" hoverEffect={false}>
                   <LuQuote className="text-brand-accent text-5xl mx-auto mb-6 opacity-50" />
                   <p className="text-lg md:text-xl italic text-gray-200 mb-8 leading-relaxed">
                     &ldquo;{testimonial.quote}&rdquo;
                   </p>
                   <div className="flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full overflow-hidden mr-4 border-2 border-brand-accent"> {/* Direct border for image */}
+                    <div className="w-16 h-16 rounded-full overflow-hidden mr-4 border-2 border-brand-accent">
                       <Image
                         src={testimonial.avatar}
                         alt={testimonial.name}
