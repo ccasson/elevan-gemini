@@ -2,36 +2,78 @@ import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Button from '../common/Button';
 
+// A separate component for the large, animated hero logo
+const HeroIntroLogo = () => {
+  const { scrollYProgress } = useScroll();
+
+  // Animate from center to top-left (navbar position)
+  const x = useTransform(scrollYProgress, [0, 0.3], ['-50%', '-250%']); // Adjust these values for final positioning
+  const y = useTransform(scrollYProgress, [0, 0.3], ['-50%', '-200%']); // Adjust these values for final positioning
+  const scale = useTransform(scrollYProgress, [0, 0.3], [1, 0.2]); // Shrink to navbar size
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]); // Fade out slightly before full transition
+
+  return (
+    <motion.div
+      className="absolute top-1/2 left-1/2 z-20 flex items-center justify-center pointer-events-none" // Use pointer-events-none so it doesn't block clicks
+      style={{ x, y, scale, opacity }}
+    >
+      <motion.svg
+        className="h-32 md:h-48 lg:h-64" // Large initial size for dramatic effect
+        viewBox="0 0 200 50"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        initial={{ opacity: 0, scale: 0.5, rotateY: 90 }} // Start invisible, small, rotated
+        animate={{ opacity: 1, scale: 1, rotateY: 0 }} // Animate to full size, no rotation
+        transition={{ duration: 1.5, ease: "easeOut" }} // Slower, impactful entrance
+      >
+        <motion.text
+          x="5"
+          y="38"
+          fontFamily="Montserrat, sans-serif"
+          fontSize="38" // Use the bolder font size here too
+          fontWeight="900"
+          className="fill-current text-brand-accent"
+          style={{
+            textShadow: '0 0 15px rgba(230, 92, 146, 0.8), 0 0 30px rgba(230, 92, 146, 0.5)', // Even stronger glow
+            stroke: '#ffffff',
+            strokeWidth: '1.2px', // Slightly thicker stroke for bold look
+            strokeLinejoin: 'round',
+          }}
+        >
+          Elevan
+        </motion.text>
+      </motion.svg>
+    </motion.div>
+  );
+};
+
+
 const Hero = () => {
   const { scrollYProgress } = useScroll();
 
-  // Scale the text down as we scroll
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.7]);
-  // Fade the text out as we scroll
-  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-  // Move the text up as we scroll
-  const y = useTransform(scrollYProgress, [0, 0.5], ['0%', '-50%']);
-
+  // Headline & Tagline animations for the hero text
+  const headlineOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5], [0, 1, 0.7]); // Fade in, then fade slightly out on scroll
+  const headlineY = useTransform(scrollYProgress, [0, 0.5], ['0%', '-50%']); // Move up on scroll
 
   const headlineVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08, // Slightly faster stagger for more dynamic feel
-        delayChildren: 0.5,   // Delay overall animation to make it pop
+        staggerChildren: 0.08,
+        delayChildren: 2.0, // Delay text animation to let HeroIntroLogo play first
       },
     },
   };
 
   const wordVariants = {
-    hidden: { opacity: 0, y: 50, rotateX: 90 }, // Start lower and rotated for dramatic entrance
+    hidden: { opacity: 0, y: 50, rotateX: 90 },
     visible: {
       opacity: 1,
       y: 0,
       rotateX: 0,
       transition: {
-        duration: 0.8, // Slower duration for more impact
+        duration: 0.8,
         ease: "easeOut",
       },
     },
@@ -39,14 +81,13 @@ const Hero = () => {
 
   const taglineVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, delay: 1.5, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, delay: 2.8, ease: "easeOut" } }, // Delayed
   };
 
   const buttonVariants = {
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, delay: 2, ease: "easeOut" } },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, delay: 3.2, ease: "easeOut" } }, // Delayed
   };
-
 
   const line1 = [
     { text: 'Elevate', color: 'text-white' },
@@ -64,20 +105,23 @@ const Hero = () => {
     <section id="home" className="relative min-h-screen flex items-center justify-center text-center overflow-hidden
                                   bg-gradient-hero bg-[length:400%_400%] animate-gradient-shift">
       {/* Darker Overlay for better text contrast */}
-      <div className="absolute inset-0 bg-black opacity-50"></div> {/* Increased opacity for more depth */}
+      <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      {/* Content */}
+      {/* Hero Intro Logo - will animate and shrink into Navbar Logo position */}
+      <HeroIntroLogo />
+
+      {/* Main Hero Content */}
       <motion.div
         className="relative z-10 p-6 max-w-4xl mx-auto"
-        style={{ scale, opacity, y }} // Apply scroll-triggered animations to the whole content block
+        style={{ opacity: headlineOpacity, y: headlineY }} // Apply scroll-triggered animations
       >
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold font-headings text-white mb-6 leading-tight" // Increased font size and boldness
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold font-headings text-white mb-6 leading-tight"
           variants={headlineVariants}
           initial="hidden"
           animate="visible"
         >
-          <div className="flex flex-wrap justify-center mb-2 perspective-[1000px]"> {/* Added perspective for 3D rotation */}
+          <div className="flex flex-wrap justify-center mb-2 perspective-[1000px]">
             {line1.map((word, index) => (
               <motion.span
                 key={`line1-${index}`}
@@ -88,7 +132,7 @@ const Hero = () => {
               </motion.span>
             ))}
           </div>
-          <div className="flex flex-wrap justify-center perspective-[1000px]"> {/* Added perspective */}
+          <div className="flex flex-wrap justify-center perspective-[1000px]">
             {line2.map((word, index) => (
               <motion.span
                 key={`line2-${index}`}
@@ -118,12 +162,12 @@ const Hero = () => {
           </Button>
         </motion.div>
       </motion.div>
-      {/* Scroll down indicator - KEEP THIS, it's helpful */}
+      {/* Scroll down indicator */}
       <motion.div
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2.5, duration: 1, repeat: Infinity, repeatType: "reverse" }}
+        transition={{ delay: 3.5, duration: 1, repeat: Infinity, repeatType: "reverse" }} // Delayed
       >
         <svg className="w-8 h-8 text-gray-400 animate-bounce" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
           <path d="M19 9l-7 7-7-7"></path>
