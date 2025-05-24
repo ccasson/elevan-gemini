@@ -43,7 +43,7 @@ const ApplyForm = () => {
               Application <span className="text-brand-accent">Received!</span>
             </h2>
             <p className="text-lg text-gray-300 mb-6">
-              Thank you for your interest in partnering with Elevan! We've received your application and our team will review it shortly. We'll be in touch within 24-48 hours.
+              Thank you for your interest in partnering with Elevan! We&apos;ve received your application and our team will review it shortly. We&apos;ll be in touch within 24-48 hours.
             </p>
             <Button onClick={() => setIsSubmitted(false)} variant="primary">
               Submit Another Application
