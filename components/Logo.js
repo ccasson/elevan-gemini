@@ -12,29 +12,52 @@ const Logo = ({ className = "text-brand-accent h-8 md:h-10" }) => (
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
       >
         <svg
-          className={className}
-          viewBox="0 0 200 50" // Adjusted viewBox for potential larger text
+          className={`${className} filter`} // Add filter class
+          viewBox="0 0 200 50"
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
         >
-          {/* Using a slightly different font-family for more distinctiveness if available, otherwise Montserrat with bolder stroke */}
+          {/* SVG Filters for glowing and slight blurring effect */}
+          <defs>
+            <filter id="neon-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+              <feFlood floodColor="#E65C92" floodOpacity="0.8" result="color" />
+              <feComposite in="color" in2="blur" operator="in" result="glow" />
+              <feMerge>
+                <feMergeNode in="glow" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            {/* Inner "3D" shadow effect */}
+            <filter id="inner-shadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feOffset dx="1" dy="1" />
+              <feGaussianBlur stdDeviation="0.5" result="offset-blur" />
+              <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse" />
+              <feFlood floodColor="#1E1E2D" floodOpacity="0.6" result="color" />
+              <feComposite operator="in" in="color" in2="inverse" result="shadow" />
+              <feMerge>
+                <feMergeNode in="shadow" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
           <motion.text
             x="5"
             y="38"
-            fontFamily="Montserrat, sans-serif" // Stick with Montserrat, but enhance styling
-            fontSize="38" // Slightly larger text
-            fontWeight="900" // Bolder weight
-            className="fill-current text-brand-accent"
+            fontFamily="Orbitron, sans-serif" // Use the new headings font
+            fontSize="38"
+            fontWeight="900"
+            className="fill-current text-brand-accent animate-shimmer" // Apply shimmer animation
             style={{
-              textShadow: '0 0 10px rgba(230, 92, 146, 0.8), 0 0 20px rgba(230, 92, 146, 0.4)', // Stronger glow
-              transition: 'text-shadow 0.3s ease-in-out',
               stroke: '#ffffff', // White stroke
-              strokeWidth: '1px', // Slightly thicker stroke
+              strokeWidth: '1.5px', // Slightly thicker stroke
               strokeLinejoin: 'round',
+              filter: 'url(#neon-glow) url(#inner-shadow)', // Apply both filters
             }}
-            initial={{ opacity: 0, x: -20 }} // More pronounced initial fade/slide for navbar logo
+            initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 2.5 }} // Delayed to appear after hero intro
+            transition={{ duration: 0.8, delay: 0.5 }} // Faster delay for navbar logo to appear
           >
             Elevan
           </motion.text>
