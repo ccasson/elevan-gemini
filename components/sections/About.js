@@ -36,10 +36,10 @@ const About = () => {
               About <span className="text-brand-accent">Elevan</span>
             </h2>
             <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-              Elevan was founded with a singular vision: to empower OnlyFans creators by providing unparalleled management, innovative growth strategies, and unwavering support. We believe in your talent, and we're here to handle the complexities so you can shine.
+              Elevan was founded with a singular vision: to empower OnlyFans creators by providing unparalleled management, innovative growth strategies, and unwavering support. We believe in your talent, and we&apos;re here to handle the complexities so you can shine.
             </p>
             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-              Our team comprises industry experts in marketing, content strategy, fan engagement, and creator relations. We operate on principles of transparency, trust, and a deep commitment to our partners' success. At Elevan, you're not just a client; you're a valued partner.
+              Our team comprises industry experts in marketing, content strategy, fan engagement, and creator relations. We operate on principles of transparency, trust, and a deep commitment to our partners&apos; success. At Elevan, you&apos;re not just a client; you&apos;re a valued partner.
             </p>
             <Button href="#apply" variant="primary" size="md">
               Start Your Journey With Us
