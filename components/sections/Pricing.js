@@ -10,7 +10,7 @@ const Pricing = () => {
       name: 'Starter',
       icon: <FaStar />,
       description: 'For aspiring creators taking their first step into professional management.',
-      fee: '35%',
+      fee: '35%', // Corrected percentage
       feeFrom: 'of tips & messages',
       features: [
         'Full Account Management',
@@ -26,7 +26,7 @@ const Pricing = () => {
       name: 'Growth',
       icon: <FaChartLine />,
       description: 'For established creators seeking comprehensive strategies for scaling.',
-      fee: '45%',
+      fee: '45%', // Corrected percentage
       feeFrom: 'of tips & messages',
       features: [
         'Full Account Management',
@@ -44,7 +44,7 @@ const Pricing = () => {
       name: 'Elite',
       icon: <FaRocket />,
       description: 'For top-tier creators demanding exclusive strategies and maximum support.',
-      fee: '55%',
+      fee: '55%', // Corrected percentage
       feeFrom: 'of tips & messages',
       features: [
         'Full Account Management',
@@ -82,27 +82,26 @@ const Pricing = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
         {tiers.map((tier, index) => {
-          // MODIFIED: Construct className string outside JSX
           const cardClasses = `
-            bg-brand-dark-secondary 
-            rounded-lg 
-            p-8 
-            flex 
-            flex-col 
-            items-center 
-            justify-between 
-            text-center 
-            transition-all 
-            duration-300 
-            ${tier.highlight ? 'border-4 border-brand-accent shadow-2xl scale-105' : 'border-2 border-brand-accent-hover shadow-lg'} 
-            text-gray-200 
+            bg-brand-dark-secondary
+            rounded-lg
+            p-8
+            flex
+            flex-col
+            items-center
+            justify-between
+            text-center
+            transition-all
+            duration-300
+            ${tier.highlight ? 'border-4 border-brand-accent shadow-2xl scale-105' : 'border-2 border-brand-accent-hover shadow-lg'}
+            text-gray-200
             h-full
-          `.replace(/\s+/g, ' ').trim(); // Clean up extra spaces
+          `.replace(/\s+/g, ' ').trim();
 
           return (
             <motion.div
               key={tier.id}
-              className={cardClasses} // Pass the constructed string
+              className={cardClasses}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
