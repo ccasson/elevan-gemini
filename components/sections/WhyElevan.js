@@ -55,7 +55,7 @@ const WhyElevan = () => {
             Why Partner with <span className="text-brand-accent">Elevan?</span>
           </h2>
           <p className="text-center text-lg text-gray-300 mb-12 md:mb-16 max-w-2xl mx-auto">
-            We're more than just an agency; we're your dedicated partners in success. Discover the Elevan difference.
+            We&apos;re more than just an agency; we&apos;re your dedicated partners in success. Discover the Elevan difference.
           </p>
         </motion.div>
 
