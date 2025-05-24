@@ -11,20 +11,19 @@
   "dependencies": {
     "framer-motion": "^10.16.4",
     "next": "13.5.6",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-hook-form": "^7.47.0",
+    "react": "^18",
+    "react-dom": "^18",
     "react-icons": "^4.11.0",
-    "react-slick": "^0.29.0",
+    "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
-    "react-tsparticles": "^2.12.2",
-    "tsparticles": "^2.12.0",
+    "react-tsparticles": "^2.12.2",   <-- ADD THIS LINE
+    "tsparticles": "^2.12.0"          <-- ADD THIS LINE
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.16",
-    "eslint": "8.52.0",
+    "autoprefixer": "^10",
+    "eslint": "^8",
     "eslint-config-next": "13.5.6",
-    "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.5"
+    "postcss": "^8",
+    "tailwindcss": "^3"
   }
 }
