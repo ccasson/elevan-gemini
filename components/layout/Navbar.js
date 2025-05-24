@@ -1,105 +1,103 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import Logo from '../Logo';
-import { LuMenu, LuX } from 'react-icons/lu';
 import { motion, AnimatePresence } from 'framer-motion';
-import Button from '../common/Button';
+import { FaBars, FaTimes } from 'react-icons/fa'; // Importing icons
+
+import Logo from '../Logo';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
 
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'Why Elevan?', href: '#why-elevan' },
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const navVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  const menuVariants = {
+    hidden: { x: '100%' },
+    visible: { x: '0%', transition: { type: 'spring', stiffness: 100, damping: 20 } },
+  };
+
+  const linkVariants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+  };
+
+  const navLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'Why Partner', href: '#why-partner' },
     { name: 'Services', href: '#services' },
     { name: 'Pricing', href: '#pricing' },
-    { name: 'About', href: '#about' },
+    { name: 'Apply', href: '#apply' },
   ];
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const mobileMenuVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.1 } },
-    exit: { opacity: 0, y: -20 }
-  };
-
-  const mobileMenuItemVariants = {
-    hidden: { opacity: 0, y: -10 },
-    visible: { opacity: 1, y: 0 }
-  };
-
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled || isOpen ? 'bg-brand-dark-secondary shadow-lg' : 'bg-transparent'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          <div className="flex items-center">
-            <Logo />
-          </div>
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {navItems.map((item) => (
-                <Link key={item.name} href={item.href} legacyBehavior>
-                  <a className="text-gray-300 hover:text-brand-accent px-3 py-2 rounded-md text-sm font-medium transition-colors" onClick={() => setIsOpen(false)}>
-                    {item.name}
-                  </a>
-                </Link>
-              ))}
-              <Button href="#apply" variant="primary" size="sm">Apply Now</Button>
-            </div>
-          </div>
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={toggleMenu}
-              type="button"
-              className="text-gray-300 hover:text-brand-accent focus:outline-none p-2"
-              aria-controls="mobile-menu"
-              aria-expanded={isOpen}
-            >
-              <span className="sr-only">Open main menu</span>
-              {isOpen ? <LuX size={24} /> : <LuMenu size={24} />}
-            </button>
-          </div>
+    <motion.nav
+      className="fixed top-0 left-0 w-full z-50 py-4 bg-brand-dark shadow-lg" // Added shadow and explicit background
+      variants={navVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <div className="container mx-auto flex justify-between items-center px-6 md:px-12 lg:px-20">
+        {/* Adjusted Logo size for larger impact */}
+        <Logo className="text-brand-accent h-10 md:h-12 lg:h-14" />
+        
+        {/* Desktop Navigation */}
+        <ul className="hidden md:flex space-x-8">
+          {navLinks.map((link, index) => (
+            <motion.li key={index} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+              <Link href={link.href} className="text-gray-200 hover:text-brand-accent transition-colors duration-300 font-bold text-lg">
+                {link.name}
+              </Link>
+            </motion.li>
+          ))}
+        </ul>
+
+        {/* Mobile Menu Button */}
+        <div className="md:hidden">
+          <button onClick={toggleMenu} className="text-gray-200 focus:outline-none">
+            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
         </div>
       </div>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            id="mobile-menu"
-            className="md:hidden bg-brand-dark-secondary pb-3"
+            className="md:hidden fixed inset-0 bg-brand-dark bg-opacity-95 z-40 flex flex-col items-center justify-center"
+            variants={menuVariants}
             initial="hidden"
             animate="visible"
-            exit="exit"
-            variants={mobileMenuVariants}
+            exit="hidden"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {navItems.map((item) => (
-                 <motion.div variants={mobileMenuItemVariants} key={item.name}>
-                    <Link href={item.href} legacyBehavior>
-                    <a className="text-gray-300 hover:text-brand-accent block px-3 py-2 rounded-md text-base font-medium transition-colors" onClick={toggleMenu}>
-                        {item.name}
-                    </a>
-                    </Link>
-                 </motion.div>
+            <button onClick={toggleMenu} className="absolute top-6 right-6 text-gray-200 focus:outline-none">
+              <FaTimes size={28} />
+            </button>
+            <ul className="flex flex-col space-y-8 text-2xl">
+              {navLinks.map((link, index) => (
+                <motion.li
+                  key={index}
+                  variants={linkVariants}
+                  initial="hidden"
+                  animate="visible"
+                  custom={index} // Pass index as custom prop for staggered animation
+                  onClick={toggleMenu} // Close menu on link click
+                >
+                  <Link href={link.href} className="text-gray-200 hover:text-brand-accent transition-colors duration-300 font-bold">
+                    {link.name}
+                  </Link>
+                </motion.li>
               ))}
-            </div>
-            <div className="px-5 pt-2 pb-3">
-              <Button href="#apply" variant="primary" size="sm" fullWidth onClick={toggleMenu}>Apply Now</Button>
-            </div>
+            </ul>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 
