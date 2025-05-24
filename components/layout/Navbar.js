@@ -29,7 +29,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Why Partner', href: '#why-partner' },
+    { name: 'Why Partner', href: '#why-elevan' }, // Corrected href to match the section ID
     { name: 'Services', href: '#services' },
     { name: 'Pricing', href: '#pricing' },
     { name: 'Apply', href: '#apply' },
@@ -37,7 +37,7 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 w-full z-50 py-4 bg-brand-dark shadow-lg" // Added shadow and explicit background
+      className="fixed top-0 left-0 w-full z-50 py-4 bg-brand-dark shadow-lg"
       variants={navVariants}
       initial="hidden"
       animate="visible"
@@ -85,8 +85,8 @@ const Navbar = () => {
                   variants={linkVariants}
                   initial="hidden"
                   animate="visible"
-                  custom={index} // Pass index as custom prop for staggered animation
-                  onClick={toggleMenu} // Close menu on link click
+                  custom={index}
+                  onClick={toggleMenu}
                 >
                   <Link href={link.href} className="text-gray-200 hover:text-brand-accent transition-colors duration-300 font-bold">
                     {link.name}
