@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FaDollarSign, FaChartLine, FaHeadphones } from 'react-icons/fa'; // Example icons
 import FeatureCard from '../common/FeatureCard'; // Import the new FeatureCard
 
-const WhyPartner = () => {
+const WhyElevan = () => { // Corrected component name
   const features = [
     {
       icon: <FaDollarSign />,
@@ -23,7 +23,7 @@ const WhyPartner = () => {
   ];
 
   return (
-    <section id="why-partner" className="section-padding bg-brand-dark">
+    <section id="why-elevan" className="section-padding bg-brand-dark"> {/* Corrected id */}
       <motion.h2
         className="text-3xl md:text-5xl font-extrabold font-headings text-white text-center mb-12"
         initial={{ opacity: 0, y: -50 }}
@@ -57,4 +57,4 @@ const WhyPartner = () => {
   );
 };
 
-export default WhyPartner;
+export default WhyElevan; // Corrected export name
