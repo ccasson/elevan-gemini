@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FaDollarSign, FaChartLine, FaHeadphones } from 'react-icons/fa'; // Example icons
 import FeatureCard from '../common/FeatureCard'; // Import the new FeatureCard
 
-const WhyElevan = () => { // Corrected component name
+const WhyElevan = () => {
   const features = [
     {
       icon: <FaDollarSign />,
@@ -18,12 +18,11 @@ const WhyElevan = () => { // Corrected component name
     {
       icon: <FaHeadphones />,
       title: 'Dedicated Account Management',
-      description: 'Receive personalized support from a dedicated account manager focused on your success and available to guide you every step.',
     },
   ];
 
   return (
-    <section id="why-elevan" className="section-padding bg-brand-dark"> {/* Corrected id */}
+    <section id="why-elevan" className="section-padding bg-brand-dark">
       <motion.h2
         className="text-3xl md:text-5xl font-extrabold font-headings text-white text-center mb-12"
         initial={{ opacity: 0, y: -50 }}
@@ -40,7 +39,7 @@ const WhyElevan = () => { // Corrected component name
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.7, delay: 0.2 }}
       >
-        We're more than just an agency; we're your dedicated partners in success. Discover the Elevan difference.
+        We&apos;re more than just an agency; we&apos;re your dedicated partners in success. Discover the Elevan difference.
       </motion.p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -57,4 +56,4 @@ const WhyElevan = () => { // Corrected component name
   );
 };
 
-export default WhyElevan; // Corrected export name
+export default WhyElevan;
