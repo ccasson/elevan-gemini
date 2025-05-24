@@ -63,3 +63,20 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Add this keyframes for the gradient background animation */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Define the gradient background here */
+.bg-gradient-hero {
+  background: linear-gradient(270deg, #1A1A2E, #3C0A4B, #6A0A7A, #3C0A4B, #1A1A2E);
+  background-size: 400% 400%;
+}
