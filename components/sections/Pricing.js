@@ -10,8 +10,8 @@ const Pricing = () => {
       name: 'Starter',
       icon: <FaStar />,
       description: 'For aspiring creators taking their first step into professional management.',
-      fee: '35%',
-      feeFrom: 'from tips & messages',
+      fee: '35%', // Updated percentage
+      feeFrom: 'of tips & messages', // Changed "from" to "of" for clarity
       features: [
         'Full Account Management',
         'Basic Content Strategy',
@@ -26,8 +26,8 @@ const Pricing = () => {
       name: 'Growth',
       icon: <FaChartLine />,
       description: 'For established creators seeking comprehensive strategies for scaling.',
-      fee: '35%',
-      feeFrom: 'from tips & messages',
+      fee: '45%', // Updated percentage
+      feeFrom: 'of tips & messages',
       features: [
         'Full Account Management',
         'Advanced Content Strategy',
@@ -44,8 +44,8 @@ const Pricing = () => {
       name: 'Elite',
       icon: <FaRocket />,
       description: 'For top-tier creators demanding exclusive strategies and maximum support.',
-      fee: '30%',
-      feeFrom: 'from tips & messages',
+      fee: '55%', // Updated percentage
+      feeFrom: 'of tips & messages',
       features: [
         'Full Account Management',
         'Premium Content Strategy',
@@ -87,7 +87,7 @@ const Pricing = () => {
             className={`
               bg-brand-dark-secondary rounded-lg p-8 flex flex-col items-center justify-between text-center transition-all duration-300
               ${tier.highlight ? 'border-4 border-brand-accent shadow-2xl scale-105' : 'border-2 border-brand-accent-hover shadow-lg'}
-              text-gray-200 h-full // Ensure text is visible and card takes full height
+              text-gray-200 h-full
             `}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -110,7 +110,7 @@ const Pricing = () => {
 
             <ul className="text-left w-full mb-8 space-y-2">
               {tier.features.map((feature, idx) => (
-                <li key={idx} className="flex items-center text-gray-200"> {/* Explicitly setting text color here */}
+                <li key={idx} className="flex items-center text-gray-200">
                   <svg className="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
                   </svg>
@@ -119,7 +119,7 @@ const Pricing = () => {
               ))}
             </ul>
 
-            <Button href={tier.buttonLink} variant={tier.highlight ? 'primary' : 'secondary'} size="lg">
+            <Button href={tier.buttonLink} variant={tier.highlight ? 'primary' : 'secondary'} size="lg'>
               {tier.buttonText}
             </Button>
           </motion.div>
