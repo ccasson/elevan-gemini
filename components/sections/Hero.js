@@ -3,12 +3,14 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Button from '../common/Button';
 import Particles from 'react-tsparticles';
 import { loadSlim } from 'tsparticles-slim';
+import ThreeDLogo from '../common/ThreeDLogo'; // Import the new 3D logo component
 
 const Hero = () => {
   const { scrollYProgress } = useScroll();
 
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5], [1, 1, 0.7]);
-  const contentY = useTransform(scrollYProgress, [0, 0.5], ['0%', '-30%']);
+  // Scroll animations for main text content (will fade out as user scrolls)
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5], [1, 1, 0]); // Fade out completely
+  const contentY = useTransform(scrollYProgress, [0, 0.5], ['0%', '-100%']); // Move up completely
 
   const headlineVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -17,7 +19,7 @@ const Hero = () => {
       y: 0,
       transition: {
         staggerChildren: 0.08,
-        delayChildren: 1.0,
+        delayChildren: 2.0, // Delay text animation to let 3D logo play first
       },
     },
   };
@@ -37,12 +39,12 @@ const Hero = () => {
 
   const taglineVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, delay: 1.8, ease: "easeOut" } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, delay: 2.8, ease: "easeOut" } },
   };
 
   const buttonVariants = {
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, delay: 2.2, ease: "easeOut" } },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.6, delay: 3.2, ease: "easeOut" } },
   };
 
   const line1 = [
@@ -67,6 +69,7 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center text-center overflow-hidden bg-brand-dark">
+      {/* Particles Background */}
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -144,6 +147,10 @@ const Hero = () => {
         }}
       />
 
+      {/* 3D Logo in the Hero Section */}
+      <ThreeDLogo />
+
+      {/* Main Hero Content - will fade out on scroll */}
       <motion.div
         className="relative z-10 p-6 max-w-4xl mx-auto"
         style={{ opacity: contentOpacity, y: contentY }}
@@ -195,11 +202,12 @@ const Hero = () => {
           </Button>
         </motion.div>
       </motion.div>
+      {/* Scroll down indicator */}
       <motion.div
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2.8, duration: 1, repeat: Infinity, repeatType: "reverse" }}
+        transition={{ delay: 3.5, duration: 1, repeat: Infinity, repeatType: "reverse" }}
       >
         <svg className="w-8 h-8 text-gray-400 animate-bounce" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
           <path d="M19 9l-7 7-7-7"></path>
