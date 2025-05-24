@@ -17,6 +17,8 @@
     "react-icons": "^4.11.0",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1"
+    "react-tsparticles": "^2.12.2",   <-- ADD THIS LINE
+    "tsparticles": "^2.12.0"          <-- ADD THIS LINE
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
