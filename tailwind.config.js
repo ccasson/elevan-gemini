@@ -17,12 +17,14 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Lato', 'sans-serif'], // Primary body font
-        headings: ['Montserrat', 'sans-serif'], // Headings font
+        // Updated fonts
+        sans: ['Inter', 'sans-serif'], // Primary body font
+        headings: ['Orbitron', 'sans-serif'], // Headings font - more unique
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-hero': 'linear-gradient(to right, #2a2a3e, #1e1e2d, #2a2a3e)', // Existing hero gradient
       },
       keyframes: {
         'gradient-shift': {
@@ -30,9 +32,16 @@ module.exports = {
           '50%': { 'background-position': '100% 50%' },
           '100%': { 'background-position': '0% 50%' },
         },
+        // More subtle shimmer for logo
+        shimmer: {
+          '0%': { 'text-shadow': '0 0 10px rgba(230, 92, 146, 0.5), 0 0 20px rgba(230, 92, 146, 0.2)' },
+          '50%': { 'text-shadow': '0 0 15px rgba(230, 92, 146, 0.8), 0 0 30px rgba(230, 92, 146, 0.4)' },
+          '100%': { 'text-shadow': '0 0 10px rgba(230, 92, 146, 0.5), 0 0 20px rgba(230, 92, 146, 0.2)' },
+        },
       },
       animation: {
         'gradient-shift': 'gradient-shift 15s ease infinite',
+        'shimmer': 'shimmer 3s infinite ease-in-out', // Apply shimmer to logo
       },
     },
   },
