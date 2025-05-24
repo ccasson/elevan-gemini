@@ -2,10 +2,10 @@
 import React from 'react';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
-import Particles from '../components/common/Particles'; // This is the background particles
+import GlobalParticles from '../components/common/Particles'; // Corrected import for global particles
 import Hero from '../components/sections/Hero';
-import WhyElevan from '../components/sections/WhyElevan'; // Correctly named
-import Services from '../components/sections/Services';
+import WhyElevan from '../components/sections/WhyElevan'; // Correct path and name
+import Services from '../components/sections/Services'; // From your structure
 import Pricing from '../components/sections/Pricing';
 import Testimonials from '../components/sections/Testimonials';
 import Contact from '../components/sections/Contact';
@@ -28,8 +28,8 @@ export default function Home() {
 
       <Navbar /> {/* Your sticky navigation header */}
 
-      {/* Particles background for the entire page */}
-      <Particles id="tsparticles" className="absolute inset-0 z-0" />
+      {/* Global Particles background for the entire page */}
+      <GlobalParticles className="absolute inset-0 z-0" />
 
       <main className="relative z-10"> {/* Ensure content is above particles */}
 
@@ -87,6 +87,26 @@ export default function Home() {
         >
           <Contact />
         </motion.section>
+
+        {/* ApplyForm and About would also be wrapped like this if they are full sections to be displayed on index */}
+        {/*
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+        >
+          <ApplyForm />
+        </motion.section>
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+        >
+          <About />
+        </motion.section>
+        */}
 
       </main>
 
