@@ -1,14 +1,13 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Button from '../common/Button';
-import Particles from 'react-tsparticles';
-import { loadSlim } from 'tsparticles-slim';
 import ThreeDLogo from '../common/ThreeDLogo'; // Import the new 3D logo component
 
 const Hero = () => {
   const { scrollYProgress } = useScroll();
 
   // Scroll animations for main text content (will fade out as user scrolls)
+  // Adjust output values as needed for desired scroll effect
   const contentOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5], [1, 1, 0]); // Fade out completely
   const contentY = useTransform(scrollYProgress, [0, 0.5], ['0%', '-100%']); // Move up completely
 
@@ -59,94 +58,8 @@ const Hero = () => {
     { text: 'Earnings.', color: 'text-brand-accent' }
   ];
 
-  const particlesInit = useCallback(async engine => {
-    await loadSlim(engine);
-  }, []);
-
-  const particlesLoaded = useCallback(async container => {
-    // console.log("Particles container loaded", container);
-  }, []);
-
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center text-center overflow-hidden bg-brand-dark">
-      {/* Particles Background */}
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        loaded={particlesLoaded}
-        className="absolute inset-0 z-0"
-        options={{
-          background: {
-            color: { value: "#1E1E2D" },
-          },
-          fpsLimit: 120,
-          interactivity: {
-            events: {
-              onClick: {
-                enable: true,
-                mode: "push",
-              },
-              onHover: {
-                enable: true,
-                mode: "repulse",
-              },
-              resize: true,
-            },
-            modes: {
-              push: {
-                quantity: 4,
-              },
-              repulse: {
-                distance: 100,
-                duration: 0.4,
-              },
-            },
-          },
-          particles: {
-            color: {
-              value: ["#E65C92", "#D0487E", "#F8F8F8", "#9B59B6"],
-            },
-            links: {
-              color: "#E65C92",
-              distance: 150,
-              enable: true,
-              opacity: 0.5,
-              width: 1,
-            },
-            collisions: {
-              enable: true,
-            },
-            move: {
-              direction: "none",
-              enable: true,
-              outModes: {
-                default: "bounce",
-              },
-              random: false,
-              speed: 2,
-              straight: false,
-            },
-            number: {
-              density: {
-                enable: true,
-                area: 800,
-              },
-              value: 80,
-            },
-            opacity: {
-              value: 0.5,
-            },
-            shape: {
-              type: "circle",
-            },
-            size: {
-              value: { min: 1, max: 5 },
-            },
-          },
-          detectRetina: true,
-        }}
-      />
-
       {/* 3D Logo in the Hero Section */}
       <ThreeDLogo />
 
