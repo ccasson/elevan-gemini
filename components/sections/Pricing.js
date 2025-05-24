@@ -10,7 +10,7 @@ const Pricing = () => {
       name: 'Starter',
       icon: <FaStar />,
       description: 'For aspiring creators taking their first step into professional management.',
-      fee: '35%', // Updated percentage
+      fee: '35%',
       feeFrom: 'of tips & messages',
       features: [
         'Full Account Management',
@@ -26,7 +26,7 @@ const Pricing = () => {
       name: 'Growth',
       icon: <FaChartLine />,
       description: 'For established creators seeking comprehensive strategies for scaling.',
-      fee: '45%', // Updated percentage
+      fee: '45%',
       feeFrom: 'of tips & messages',
       features: [
         'Full Account Management',
@@ -44,7 +44,7 @@ const Pricing = () => {
       name: 'Elite',
       icon: <FaRocket />,
       description: 'For top-tier creators demanding exclusive strategies and maximum support.',
-      fee: '55%', // Updated percentage
+      fee: '55%',
       feeFrom: 'of tips & messages',
       features: [
         'Full Account Management',
@@ -84,11 +84,8 @@ const Pricing = () => {
         {tiers.map((tier, index) => (
           <motion.div
             key={tier.id}
-            className={`
-              bg-brand-dark-secondary rounded-lg p-8 flex flex-col items-center justify-between text-center transition-all duration-300
-              ${tier.highlight ? 'border-4 border-brand-accent shadow-2xl scale-105' : 'border-2 border-brand-accent-hover shadow-lg'}
-              text-gray-200 h-full
-            `}
+            // MODIFIED LINE BELOW: Consolidated className to avoid parsing issues
+            className={`bg-brand-dark-secondary rounded-lg p-8 flex flex-col items-center justify-between text-center transition-all duration-300 ${tier.highlight ? 'border-4 border-brand-accent shadow-2xl scale-105' : 'border-2 border-brand-accent-hover shadow-lg'} text-gray-200 h-full`}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
