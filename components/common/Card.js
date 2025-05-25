@@ -1,20 +1,17 @@
+// components/common/Card.js
 import React from 'react';
 import { motion } from 'framer-motion';
 
 const Card = ({ children, className = '', hoverEffect = true }) => {
-  const baseClasses = `
-    rounded-lg p-6 transition-all duration-300 relative
-    bg-brand-dark-secondary
-    border-2 border-brand-accent-hover  // Default border for cards
-  `;
+  const baseClasses = 'rounded-lg p-6 transition-all duration-300 relative bg-brand-dark-secondary border-2 border-brand-accent-hover';
 
-  const dynamicClasses = hoverEffect
-    ? 'hover:shadow-2xl hover:border-brand-accent transform hover:scale-103'
+  const hoverClasses = hoverEffect
+    ? 'transform hover:scale-105 hover:shadow-2xl hover:border-brand-accent'
     : '';
 
   return (
     <motion.div
-      className={`${baseClasses} ${dynamicClasses} ${className}`}
+      className={`${baseClasses} ${hoverClasses} ${className}`}
     >
       {children}
     </motion.div>
