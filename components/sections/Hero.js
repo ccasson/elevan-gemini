@@ -5,27 +5,43 @@ import ThreeDLogo from '../common/ThreeDLogo';
 
 const Hero = () => {
   const { scrollYProgress } = useScroll();
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.2, 0.5], [1, 1, 0]);
-  const contentY       = useTransform(scrollYProgress, [0, 0.5], ['0%', '-100%']);
+  // Fade the content out only slightly, and move it up just a bit on scroll
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0.7]);
+  const contentY       = useTransform(scrollYProgress, [0, 0.5], ['0%', '-30%']);
 
+  // Reduce all animation delays so text comes in faster
   const headlineVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
-      opacity: 1, y: 0,
-      transition: { staggerChildren: 0.05, delayChildren: 0.5 }
+      opacity: 1,
+      y: 0,
+      transition: { staggerChildren: 0.05, delayChildren: 0.2 },
     },
   };
   const wordVariants = {
     hidden: { opacity: 0, y: 20, rotateX: 90 },
-    visible: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.6 } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: { duration: 0.6, ease: 'easeOut' },
+    },
   };
   const taglineVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 1.2 } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, delay: 0.6, ease: 'easeOut' },
+    },
   };
   const buttonVariants = {
     hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, delay: 1.6 } },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5, delay: 1.0, ease: 'easeOut' },
+    },
   };
 
   const line1 = [
@@ -40,9 +56,14 @@ const Hero = () => {
   ];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center text-center overflow-hidden bg-brand-dark"
+    >
+      {/* 3D logo sits behind the content */}
       <ThreeDLogo />
 
+      {/* Main content fades/scrolls smoothly */}
       <motion.div
         className="relative z-10 p-6 max-w-4xl mx-auto"
         style={{ opacity: contentOpacity, y: contentY }}
@@ -54,15 +75,23 @@ const Hero = () => {
           animate="visible"
         >
           <div className="flex flex-wrap justify-center mb-2 perspective-[1000px]">
-            {line1.map((word,i)=>(
-              <motion.span key={i} className={`${word.color} inline-block mx-1`} variants={wordVariants}>
+            {line1.map((word, i) => (
+              <motion.span
+                key={i}
+                className={`${word.color} inline-block mx-1`}
+                variants={wordVariants}
+              >
                 {word.text}
               </motion.span>
             ))}
           </div>
           <div className="flex flex-wrap justify-center perspective-[1000px]">
-            {line2.map((word,i)=>(
-              <motion.span key={i} className={`${word.color} inline-block mx-1`} variants={wordVariants}>
+            {line2.map((word, i) => (
+              <motion.span
+                key={i}
+                className={`${word.color} inline-block mx-1`}
+                variants={wordVariants}
+              >
                 {word.text}
               </motion.span>
             ))}
@@ -85,13 +114,22 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
+      {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2.0, duration: 1, repeat: Infinity, repeatType: 'reverse' }}
+        transition={{ delay: 1.5, duration: 1, repeat: Infinity, repeatType: 'reverse' }}
       >
-        <svg className="w-8 h-8 text-gray-400 animate-bounce" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+        <svg
+          className="w-8 h-8 text-gray-400 animate-bounce"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
           <path d="M19 9l-7 7-7-7" />
         </svg>
       </motion.div>
