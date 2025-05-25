@@ -80,3 +80,6 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(270deg, #1A1A2E, #3C0A4B, #6A0A7A, #3C0A4B, #1A1A2E);
   background-size: 400% 400%;
 }
+body {
+  @apply bg-brand-dark;
+}
