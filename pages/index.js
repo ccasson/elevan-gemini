@@ -9,7 +9,6 @@ import Services from '../components/sections/Services';
 import Pricing from '../components/sections/Pricing';
 import Testimonials from '../components/sections/Testimonials';
 import About from '../components/sections/About';
-import Contact from '../components/sections/Contact';
 import ApplyForm from '../components/sections/ApplyForm';
 
 export default function Home() {
