@@ -5,47 +5,49 @@
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;500;600;700;800&display=swap');
 
-html, body { /* Added html selector here */
-  @apply bg-brand-dark text-gray-200 font-sans antialiased overflow-x-hidden; /* ADDED overflow-x-hidden HERE */
+html, body {
+  @apply bg-brand-dark text-gray-200 font-sans antialiased overflow-x-hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
   @apply font-headings;
 }
 
-/* Custom Scrollbar (Optional, for a more polished look) */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #1E1E2D; /* brand-dark-secondary */
+  background: #1E1E2D;
 }
 ::-webkit-scrollbar-thumb {
-  background: #E65C92; /* brand-accent */
+  background: #E65C92;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D0487E; /* brand-accent-hover */
+  background: #D0487E;
 }
 
 /* react-slick custom styling */
 .slick-dots li button:before {
   font-size: 10px;
-  color: #E65C92; /* brand-accent */
+  color: #E65C92;
   opacity: 0.5;
 }
 .slick-dots li.slick-active button:before {
   opacity: 1;
-  color: #E65C92; /* brand-accent */
+  color: #E65C92;
 }
 .slick-prev:before,
 .slick-next:before {
-  font-size: 24px; /* Adjust size as needed */
-  color: #E65C92; /* brand-accent */
+  font-size: 24px;
+  color: #E65C92;
 }
-.slick-prev:hover:before, .slick-prev:focus:before,
-.slick-next:hover:before, .slick-next:focus:before {
-  color: #D0487E; /* brand-accent-hover */
+.slick-prev:hover:before,
+.slick-prev:focus:before,
+.slick-next:hover:before,
+.slick-next:focus:before {
+  color: #D0487E;
 }
 
 /* Section padding utility */
@@ -53,7 +55,7 @@ h1, h2, h3, h4, h5, h6 {
   @apply py-16 md:py-24 px-6 md:px-12 lg:px-20;
 }
 
-/* Custom animation classes if not using Tailwind's animation directly everywhere */
+/* Scroll animations utility */
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(20px);
@@ -64,22 +66,22 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(0);
 }
 
-/* Add this keyframes for the gradient background animation */
+/* Gradient keyframes */
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
 .animate-gradient-shift {
   animation: gradient-shift 15s ease infinite;
 }
-
-/* Define the gradient background here */
 .bg-gradient-hero {
   background: linear-gradient(270deg, #1A1A2E, #3C0A4B, #6A0A7A, #3C0A4B, #1A1A2E);
   background-size: 400% 400%;
 }
-body {
-  @apply bg-brand-dark;
+
+/* ————————————————————————————————————————— */
+/* Transparent-out all sections so particles show */
+section {
+  background: transparent !important;
 }
