@@ -8,15 +8,26 @@ import WhyElevan from '../components/sections/WhyElevan';
 import Services from '../components/sections/Services';
 import Pricing from '../components/sections/Pricing';
 import Testimonials from '../components/sections/Testimonials';
+import About from '../components/sections/About';
 import Contact from '../components/sections/Contact';
 import ApplyForm from '../components/sections/ApplyForm';
-import About from '../components/sections/About';
 
 export default function Home() {
   const fadeVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.8, ease: 'easeOut' } },
   };
+
+  const sections = [
+    Hero,
+    WhyElevan,
+    Services,
+    Pricing,
+    Testimonials,
+    About,
+    Contact,
+    ApplyForm,
+  ];
 
   return (
     <>
@@ -26,22 +37,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {[
-        Hero,
-        WhyElevan,
-        Services,
-        Pricing,
-        Testimonials,
-        About,
-        Contact,
-        ApplyForm,
-      ].map((Section, idx) => (
+      {sections.map((Section, idx) => (
         <motion.section
           key={idx}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
           variants={fadeVariants}
+          className="relative z-10"
         >
           <Section />
         </motion.section>
