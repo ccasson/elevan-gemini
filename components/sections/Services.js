@@ -1,7 +1,29 @@
+// components/sections/Services.js
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaUserCog, FaFileAlt, FaVideo, FaComments } from 'react-icons/fa'; // Example icons
-import FeatureCard from '../common/FeatureCard'; // Import the new FeatureCard
+import { FaUserCog, FaFileAlt, FaVideo, FaComments } from 'react-icons/fa';
+import FeatureCard from '../common/FeatureCard';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      when: "beforeChildren",
+      ease: "easeOut",
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
 
 const Services = () => {
   const services = [
@@ -48,16 +70,23 @@ const Services = () => {
         We provide a full suite of services designed to elevate your OnlyFans presence and maximize your income potential.
       </motion.p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
         {services.map((service, index) => (
-          <FeatureCard
-            key={index}
-            icon={service.icon}
-            title={service.title}
-            description={service.description}
-          />
+          <motion.div key={index} variants={itemVariants}>
+            <FeatureCard
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };
