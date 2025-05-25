@@ -9,12 +9,11 @@ import Services from '../components/sections/Services';
 import Pricing from '../components/sections/Pricing';
 import Testimonials from '../components/sections/Testimonials';
 import About from '../components/sections/About';
-import Contact from '../components/sections/Contact'; 
 import ApplyForm from '../components/sections/ApplyForm';
 
 export default function Home() {
   const fadeVariants = {
-    hidden: { opacity: 0 },
+    hidden:  { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.8, ease: 'easeOut' } },
   };
 
@@ -25,8 +24,7 @@ export default function Home() {
     Pricing,
     Testimonials,
     About,
-    Contact,
-    ApplyForm,
+    ApplyForm,  // Contact removed
   ];
 
   return (
@@ -44,7 +42,6 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
           variants={fadeVariants}
-          className="relative z-10"
         >
           <Section />
         </motion.section>
