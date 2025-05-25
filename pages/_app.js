@@ -1,4 +1,3 @@
-// pages/_app.js
 import '../styles/globals.css';
 import GlobalParticles from '../components/common/Particles';
 import Navbar from '../components/layout/Navbar';
